@@ -17,6 +17,7 @@ from config import *
 from logzero import logger
 import grequests
 from esuntils import EsUntils
+from fileuntils import write_excel
 
 
 request_count = 0
@@ -198,6 +199,7 @@ def main_requests(**kwargs):
         result = get_result(interface_name, req_url, method, json.dumps(header), json.dumps(response),
                             json.dumps(assert_params), issue, req_code,usd_time,time_stamp)
         async_insert_result(result)
+        # api_write(result)
         common.sublist = []
         # 重置二级接口列表
         sub_url_list = common.get_url_list(response)
@@ -229,6 +231,16 @@ def async_insert_result(result):
     logger.info('异步插入数据完成 ==> {}'.format(res_list[0].text))
 
     EsUntils(es_index_name).insert(result)
+
+
+
+def api_write(result):
+    result['id'] = request_count
+    items_list = []
+    for i  in dict(result).items():
+        items_list.append(i[1])
+    value_list = [items_list]
+    write_excel(sheet_name=sheet_name, header_list=header_list, value_list=value_list, save_excel_name=save_excel_name)
 
 
 

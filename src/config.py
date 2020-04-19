@@ -98,3 +98,9 @@ is_debug = True
 
 interval_time = 10
 
+sheet_name = 'api'
+header_list = ['id','interface_name', 'url', 'method', 'method', 'header', 'response', 'assert_params', 'issue', 'status_code', 'usd_time', 'time_stamp']
+save_excel_name = base_path + '/cases/api.xlsx'
+
+
+

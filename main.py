@@ -20,10 +20,14 @@ from apscheduler.jobstores.memory import MemoryJobStore
 from apscheduler.events import EVENT_JOB_EXECUTED, EVENT_JOB_ERROR
 from src.esuntils import EsUntils
 from src.config import *
+from src.fileuntils import write_excel
+
 
 
 EsUntils(es_index_name).create_index()
 # 创建索引
+
+
 
 
 def server_task():
